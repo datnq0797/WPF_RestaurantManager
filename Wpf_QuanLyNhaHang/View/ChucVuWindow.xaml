@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.View.ChucVuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"
+      
+        DataContext="{StaticResource ChucVuVM}" d:DesignWidth="631.8" d:DesignHeight="541"
+       
+      
+        
+        
+        
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <materialDesign:Card Margin="5" Grid.Row="1">
+            <WrapPanel>
+                <TextBox
+                    x:Name="txbTenCV"
+                    Text="{Binding TenCV,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Chức vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                <TextBox
+                    x:Name="txbPhuCap"
+                    Text="{Binding PhuCap,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Phụ cấp" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                
+
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                </Button>
+                <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                </Button>
+                <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                </Button>
+                <TextBox
+                  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                   Margin="15 0 0 0" Width="200"
+                  materialDesign:HintAssist.Hint="Tìm kiếm"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </TextBox>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3" Margin="5">
+            <ListView ItemsSource="{Binding listChucVu, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã chức vụ" DisplayMemberBinding="{Binding MACV}"></GridViewColumn>
+                        <GridViewColumn Header="Tên chức vụ" DisplayMemberBinding="{Binding TENCV}"></GridViewColumn>
+                        <GridViewColumn Header="Phụ cấp" DisplayMemberBinding="{Binding PHUCAP}"></GridViewColumn>
+                        
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+
+
+

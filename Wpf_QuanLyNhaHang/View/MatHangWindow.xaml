@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.MatHangWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"
+       
+        mc:Ignorable="d"  
+        DataContext="{StaticResource MatHangVM}"
+       
+    Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <materialDesign:Card Grid.Row="1" Margin="5">
+            <WrapPanel>
+                <TextBox
+                    x:Name="txbTenMH"
+                    Text="{Binding TenMH,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Tên mặt hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
+                <ComboBox
+                    
+                    x:Name="cbMaLoaiMH"
+                    Grid.Row="2"
+                    FontSize="12"
+                    IsEditable="True"
+                    ItemsSource="{Binding listLoaiMH,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    materialDesign:HintAssist.Hint="Loại Mặt Hàng"
+                    DisplayMemberPath="TENLOAIMH"
+                    SelectedItem="{Binding SelectedLoaiMH,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    >
+
+                </ComboBox>
+                <TextBox
+                    Text="{Binding Soluong,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Số lượng"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+                <DatePicker
+                    Text="{Binding HSD,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+   Margin="5 5 15 5"                 
+  Width="140"
+  materialDesign:HintAssist.Hint="Hạn sử dụng"
+                  
+  Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                
+                <TextBox
+                    Text="{Binding Gia,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Giá"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+                <TextBox
+                    Text="{Binding DVT,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Đơn vị tính"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+            </WrapPanel>
+        </materialDesign:Card >
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                </Button>
+                <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                </Button>
+                <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                </Button>
+                <TextBox
+                  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                   Margin="15 0 0 0" Width="200"
+                  materialDesign:HintAssist.Hint="Tìm kiếm"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </WrapPanel>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="3" Margin="5" VerticalAlignment="Stretch" >
+            <ListView ItemsSource="{Binding listMatHang, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã mặt hàng" DisplayMemberBinding="{Binding MAMH}"></GridViewColumn>
+                        <GridViewColumn Header="Mã loại mặt hàng" DisplayMemberBinding="{Binding LOAIMH.TENLOAIMH}"></GridViewColumn>
+                        <GridViewColumn Header="Tên mặt hàng" DisplayMemberBinding="{Binding TENMH}"></GridViewColumn>
+                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding SOLUONG}"></GridViewColumn>
+                        <GridViewColumn Header="Hạn sử dụng" DisplayMemberBinding="{Binding HANSUDUNG,StringFormat='d/MM/yyyy'}" ></GridViewColumn>
+                        <GridViewColumn Header="Giá" DisplayMemberBinding="{Binding GIA}"></GridViewColumn>
+                        <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DVT}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

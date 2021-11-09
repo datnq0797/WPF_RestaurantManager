@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.View.PhieuNhapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"
+       
+         
+        DataContext="{StaticResource PhieuNhapVM}"
+       
+         Height="450" Width="800"
+        
+        
+        
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <materialDesign:Card Margin="5" Grid.Row="1">
+            <WrapPanel>
+           
+                
+                <ComboBox
+                    x:Name="cbMaNV"
+                    Grid.Row="2"
+                    FontSize="12"
+                     Margin="5 5 15 5"
+                    IsEditable="True"
+                    ItemsSource="{Binding ListNV,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+  materialDesign:HintAssist.Hint="Nhân viên"
+                    DisplayMemberPath="TENNV"
+                    SelectedItem="{Binding SelectedNhanVien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    >
+
+                </ComboBox>
+                <DatePicker
+                    Text="{Binding NgayNhapPhieu,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+   Margin="5 5 15 5"                 
+  Width="150"
+                    DisplayDateStart="4/5/2021"
+  materialDesign:HintAssist.Hint="Ngày nhập phiếu"
+  Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                </Button>
+                <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                </Button>
+                <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                </Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3" Margin="5">
+            <ListView ItemsSource="{Binding ListPN, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã phiếu nhập" DisplayMemberBinding="{Binding MAPN}"></GridViewColumn>
+                        <GridViewColumn Header="Nhân viên" DisplayMemberBinding="{Binding NHANVIEN.MANV}"></GridViewColumn>
+                        <GridViewColumn Header="Ngày nhập phiếu" DisplayMemberBinding="{Binding NGAYNHAPPHIEU}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+

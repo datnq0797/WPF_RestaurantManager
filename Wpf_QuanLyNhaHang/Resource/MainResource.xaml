@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"     
+             
+                    xmlns:viewmodel="clr-namespace:Wpf_QuanLyNhaHang.ViewModel"
+                    xmlns:viewmodel2="clr-namespace:Wpf_QuanLyNhaHang.ViewModel.ReportViewModel">
+
+
+    <viewmodel:MatHangViewModel x:Key="MatHangVM"></viewmodel:MatHangViewModel>
+    <viewmodel:NhanVienViewModel x:Key="NhanVienVM"></viewmodel:NhanVienViewModel>
+    <viewmodel:LoaiMHViewModel x:Key="LoaiMHVM"></viewmodel:LoaiMHViewModel>
+    <viewmodel:CTPhieuNhapViewModel x:Key="CTPNVM"></viewmodel:CTPhieuNhapViewModel>
+    <viewmodel:PhieuNhapViewModel x:Key="PhieuNhapVM"></viewmodel:PhieuNhapViewModel>
+    <viewmodel:TaiKhoanViewModel x:Key="TaiKhoanVM"></viewmodel:TaiKhoanViewModel>
+    <viewmodel:ChucVuViewModel x:Key="ChucVuVM"></viewmodel:ChucVuViewModel>
+    <viewmodel:KhuyenMaiViewModel x:Key="KhuyenMaiVM"></viewmodel:KhuyenMaiViewModel>
+    <viewmodel:MenuViewModel x:Key="MenuVM"></viewmodel:MenuViewModel>
+    <viewmodel:LoaiMAViewModel x:Key="LoaiMAVM"></viewmodel:LoaiMAViewModel>
+    <viewmodel:CTOrder_ViewModel x:Key="CTOrderVM"></viewmodel:CTOrder_ViewModel>
+    <viewmodel:Order_ViewModel x:Key="OrderVM"></viewmodel:Order_ViewModel>
+    <viewmodel:KhachHangViewModel x:Key="KhachHangVM"></viewmodel:KhachHangViewModel>
+    <viewmodel:DangNhapViewModel x:Key="DangNhapVM"></viewmodel:DangNhapViewModel>
+    <viewmodel:ChartMainViewModel x:Key="ChartMainVM"></viewmodel:ChartMainViewModel>
+    <viewmodel2:Report_Hangton_nhap x:Key="Hangton_nhapVM"></viewmodel2:Report_Hangton_nhap>
+    <viewmodel:ThanhToanViewModel x:Key="ThanhToanVM"></viewmodel:ThanhToanViewModel>
+    <viewmodel2:ReportDoanhThu_MonAn x:Key="DoanhThu_MonAnVM"></viewmodel2:ReportDoanhThu_MonAn>    
+
+</ResourceDictionary>

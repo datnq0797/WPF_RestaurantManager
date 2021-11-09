@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.View.KhachHangWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang.View"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"
+      
+         
+        DataContext="{StaticResource KhachHangVM}"
+       
+      Height="550" Width="900"
+        
+
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <materialDesign:Card Margin="5" Grid.Row="1">
+            <WrapPanel>
+                <ComboBox
+                     Margin="5 5 15 5"
+                   
+                    Grid.Row="2"
+                    FontSize="12"
+                    IsEditable="True"
+                    ItemsSource="{Binding ListLoaiKH,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    materialDesign:HintAssist.Hint="Loại khách hàng"
+                    DisplayMemberPath="TENLOAIKH"
+                    SelectedItem="{Binding SelectedLoaiKH,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    ></ComboBox>
+
+                
+                <TextBox
+             
+                   
+                    Text="{Binding TenKH,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Tên khách hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                <TextBox
+             
+                   
+                    Text="{Binding QueQuan,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Quê quán" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                <TextBox
+             
+                   
+                    Text="{Binding CMND,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Chứng minh nhân dân" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                <TextBox
+             
+                   
+                    Text="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+
+                <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding GioiTinh, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Giới Tính">
+                    <ComboBoxItem Content="Nam" Tag="0"/>
+                    <ComboBoxItem Content="Nu" Tag="1"/>
+
+                </ComboBox>
+
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                </Button>
+                <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                </Button>
+                <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                </Button>
+                <TextBox
+                  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                   Margin="15 0 0 0" Width="200"
+                  materialDesign:HintAssist.Hint="Tìm kiếm"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3" Margin="5">
+            <ListView ItemsSource="{Binding ListKhachHang, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Loại khách hàng" DisplayMemberBinding="{Binding LOAIKH.TENLOAIKH}"></GridViewColumn>
+                        <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding TENKH}"></GridViewColumn>
+                        <GridViewColumn Header="Quê quán" DisplayMemberBinding="{Binding QUEQUAN }"></GridViewColumn>
+                        <GridViewColumn Header="Chứng minh" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
+                        <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                        <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GIOITINH}"></GridViewColumn>
+                        
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+
+

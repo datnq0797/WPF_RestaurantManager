@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.Reporting.ChartMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            
+             xmlns:local="clr-namespace:Wpf_QuanLyNhaHang.Reporting"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="800"
+              DataContext="{StaticResource ChartMainVM}"
+             >
+
+    <Grid>
+       
+
+        <materialDesign:Card  
+  Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+  Width="200"
+  Height="100"          
+  Margin="167,25,433,625.4">
+                <materialDesign:Card.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFF0084" Offset="1"/>
+                        <GradientStop Color="#FFFF00BB"/>
+                    </LinearGradientBrush>
+                </materialDesign:Card.Background>
+                <Grid>
+                    <Image Width="50" Margin="140,7,10,44"
+                      Name="picStaff" Source="/Wpf_QuanLyNhaHang;component/Assets/steward.png"
+                     
+                   />
+                    <Label Margin="10,68,10,5"
+                       Name="infoStaff" FontSize="12"
+                       Content="{Binding infoStaff}" Foreground="#DDFFFFFF" FontFamily="Montserrat"
+                   />
+                    <Label Margin="80,33,88,44"
+                       Name="countStaff"
+                       Content="{Binding countStaff}" Foreground="#DDFFFDFD" RenderTransformOrigin="0.697,0.983" FontFamily="Montserrat"
+                   />
+                    <Label Margin="10,6,110,71"
+                       Content="Best Staff "
+                       FontStyle="Oblique" Foreground="#DDFFFFFF" FontFamily="Showcard Gothic"
+                       
+                   />
+                    <Label Margin="10,33,120,44"
+                       Content="Sản phẩm " Foreground="#DDF8FFFF" FontFamily="Montserrat"
+                       
+                   />
+                </Grid>
+
+
+
+            </materialDesign:Card>
+        <materialDesign:Card 
+          Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+          Width="200"
+          Height="100"          
+          Margin="417,25,183,625.4">
+                <materialDesign:Card.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF9FF00" Offset="1"/>
+                        <GradientStop Color="#FFFF6E00"/>
+                    </LinearGradientBrush>
+                </materialDesign:Card.Background>
+                <Grid>
+
+                    <Label Margin="5,49,65,10"
+                       Name="sumTotal" FontSize="20"
+                       Content="{Binding sumTotal}" Foreground="#DDFFFFFF" FontFamily="Montserrat"
+                   />
+
+                    <Label Margin="0,10,48,51"
+                       Content="Tổng doanh thu tháng " Foreground="#DDF8FFFF" FontFamily="Montserrat"
+                       
+                   />
+                    <Image Width="50" Margin="140,0,10,51" Source="/Wpf_QuanLyNhaHang;component/Assets/sale.png"
+                      
+                       
+                   >
+
+                    </Image>
+                <Image Width="50" Margin="135,49,15,2"
+                       Source="C:\Users\DAT\source\repos\Wpf_QuanLyNhaHang\Wpf_QuanLyNhaHang\Assets\dollars.png"
+                     
+                   />
+            </Grid>
+
+
+
+            </materialDesign:Card>
+
+        <materialDesign:Card  Margin="10,140,10,9.6" VerticalAlignment="Stretch"
+                Height="500"  Width="780"            
+                              >
+            <ListView ItemsSource="{Binding ListBanDat, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="TÊN KHÁCH HÀNG" DisplayMemberBinding="{Binding KHACHHANG.TENKH}"></GridViewColumn>
+                        <GridViewColumn Header="SỐ KHÁCH" DisplayMemberBinding="{Binding SOKHACH}"></GridViewColumn>
+                        <GridViewColumn Header="SỐ TIỀN ĐẶT" DisplayMemberBinding="{Binding SOTIENDAT}"></GridViewColumn>
+                        <GridViewColumn Header="NGÀY ĐẶT" DisplayMemberBinding="{Binding NGAYDAT}"></GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

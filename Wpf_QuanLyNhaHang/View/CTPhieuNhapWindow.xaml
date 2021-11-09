@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.View.CTPhieuNhapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang"
+        mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"
+        
+         
+        DataContext="{StaticResource CTPNVM}"
+       
+         Height="450" Width="800"
+        
+        
+        
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <materialDesign:Card Margin="5" Grid.Row="1">
+            <WrapPanel>
+                <TextBox
+                    x:Name="txbMaCTPN"
+                    Text="{Binding MaPN,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Mã phiếu nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+                <ComboBox
+                    x:Name="cbMaMH"
+                    Grid.Row="2"
+                    FontSize="12"
+                    IsEditable="True"
+                    ItemsSource="{Binding ListMH,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+  materialDesign:HintAssist.Hint="Mặt Hàng"
+                    DisplayMemberPath="TENMH"
+                    SelectedItem="{Binding SelectedMatHang,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    >
+
+                </ComboBox>
+                <TextBox
+                    x:Name="txbSoluong"
+                    Text="{Binding MaMH,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Số lượng nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <WrapPanel>
+                <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                </Button>
+                <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                </Button>
+                <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                </Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="3" Margin="5">
+            <ListView ItemsSource="{Binding ListCTPN, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã phiếu nhập" DisplayMemberBinding="{Binding MAPN}"></GridViewColumn>
+                        <GridViewColumn Header="Tên mặt hàng" DisplayMemberBinding="{Binding MATHANG.TENMH}"></GridViewColumn>
+                        <GridViewColumn Header="Số lượng nhập" DisplayMemberBinding="{Binding SLNHAP}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+

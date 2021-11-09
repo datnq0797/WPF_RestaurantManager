@@ -1,0 +1,184 @@
+﻿<UserControl x:Class="Wpf_QuanLyNhaHang.View.NhanVienWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_QuanLyNhaHang"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"       
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+        x:Name="window"    
+        mc:Ignorable="d"  
+        DataContext="{StaticResource NhanVienVM}"   
+         Height="450" Width="824">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <materialDesign:Card Grid.Row="0" Margin="5">
+                    <WrapPanel>
+                        <TextBox
+                    x:Name="txbTenNV"
+                    Text="{Binding TenNV,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Tên nhân viên" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
+                        <ComboBox
+                    Width="100"
+                     Margin="5 5 15 0"
+                    x:Name="cbChucVu"
+                    Grid.Row="2"
+                    FontSize="12"
+                    IsEditable="True"
+                    ItemsSource="{Binding listChucVu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+  materialDesign:HintAssist.Hint="Chức vụ"
+                    DisplayMemberPath="TENCV"
+                    SelectedItem="{Binding SelectedChucVu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    >
+
+                        </ComboBox>
+                        <DatePicker
+                    Text="{Binding NgaySinh,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+   Margin="5 5 15 5"                 
+  Width="140"
+  materialDesign:HintAssist.Hint="Ngày sinh"
+  Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                        <TextBox
+                    Text="{Binding QueQuan,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Quê quán"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+                        <TextBox
+                    Width="100"
+                    Text="{Binding CMND,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Số chứng minh"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+                        <TextBox
+                    Text="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Số điện thoại"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+  VerticalAlignment="Center" />
+                        <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding GioiTinh, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Giới Tính">
+                            <ComboBoxItem Content="Nam" Tag="0"/>
+                            <ComboBoxItem Content="Nu" Tag="1"/>
+                            
+                        </ComboBox>
+                        <TextBox
+                    x:Name="txbTTGD"
+                    Text="{Binding TTGD,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Tình trạng gia đình" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
+                        <TextBox
+                    Width="100"
+                    x:Name="txbLuong"
+                    Text="{Binding Luong,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Lương" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+                        <TextBox
+                    Width="100"
+                    x:Name="txbTrangThai"
+                    Text="{Binding TrangThai,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5 5 15 5"
+  materialDesign:HintAssist.Hint="Trạng thái" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                    VerticalAlignment="Center" />
+                        <ComboBox
+                    Width="100"
+                     Margin="5 5 15 0"
+                    x:Name="cbTaiKhoan"
+                    Grid.Row="2"
+                    FontSize="12"
+                    IsEditable="True"
+                    ItemsSource="{Binding listTaiKhoan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+  materialDesign:HintAssist.Hint="Tài khoản"
+                    DisplayMemberPath="USER"
+                    SelectedItem="{Binding SelectedTaiKhoan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    >
+
+                        </ComboBox>
+
+                    </WrapPanel>
+                </materialDesign:Card >
+                <materialDesign:Card Grid.Row="1" Margin="5" >
+                    <WrapPanel>
+                        <Button Content="Thêm" Command="{Binding SaveCommand}" Margin="5" >
+                        </Button>
+                        <Button Content="Xóa" Command="{Binding DeleteCommand}" Margin="5">
+                        </Button>
+                        <Button Content="Sửa" Command="{Binding UpdateCommand}" Margin="5">
+                        </Button>
+                        <Button Content="Chọn hình" Command="{Binding ImageCommand}" Margin="5">
+                        </Button>
+                        <TextBox
+                  Text="{Binding Search,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                   Margin="15 0 0 0" Width="200"
+                  materialDesign:HintAssist.Hint="Tìm kiếm"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </WrapPanel>
+                </materialDesign:Card>
+            </Grid>
+            <StackPanel  Grid.Column="1" Orientation="Horizontal">
+                <Image Width="220" Height="200"  Source="{Binding Image}"/>
+            </StackPanel>
+            
+        </Grid>
+        
+        
+        
+        <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch" >
+            <ListView ItemsSource="{Binding listNHANVIEN, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Mã nhân viên" DisplayMemberBinding="{Binding MANV}"></GridViewColumn>
+                        <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TAIKHOAN.USER}"></GridViewColumn>
+                        <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding CHUCVU.TENCV}"></GridViewColumn>
+                        <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding TENNV}"></GridViewColumn>
+                        <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NGAYSINH,StringFormat='d/MM/yyyy'}"></GridViewColumn>
+                        <GridViewColumn Header="Quê quán" DisplayMemberBinding="{Binding QUEQUAN}"></GridViewColumn>
+                        <GridViewColumn Header="Số chứng minh" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
+                        <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                        <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GIOITINH}"></GridViewColumn>
+                        <GridViewColumn Header="Tình trạng gia đình" DisplayMemberBinding="{Binding TTGD}"></GridViewColumn>
+                        <GridViewColumn Header="Lương căn bản" DisplayMemberBinding="{Binding LUONGCANBAN}"></GridViewColumn>
+                        <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TRANGTHAI}"></GridViewColumn>
+                        <GridViewColumn Header="Hình ảnh" DisplayMemberBinding="{Binding HINH_ANH}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
+
